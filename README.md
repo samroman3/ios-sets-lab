@@ -3,7 +3,7 @@
 Fork and clone this repo. On your fork, answer and commit the follow questions. When you are finished, submit the link to your repo on Canvas.
 
 
-## Question 1
+## Question 1- done
 
 Ms. Gabriel Williams is a botany professor at District College. One day, she asked her student Mickey to compute the average of all the plants with distinct heights in her greenhouse.
 
@@ -13,14 +13,41 @@ Input: heights of trees below:
 Output:
 `169.375`
 
+```
+var heights = [161, 182, 161, 154, 176, 170, 167, 171, 170, 174]
 
-## Question 2
+var heightsSet = Set(heights)
+
+var sum: Int = 0
+var average = 0
+for n in heightsSet{
+sum += n
+}
+average = sum / heightsSet.count
+print(average)
+
+```
+
+## Question 2 - 
 
 Determine if a String is a pangram. A pangram is a string that contains every letter of the alphabet at least once.
 
  e.g `"The quick brown fox jumps over the lazy dog"` is a pangram
  e.g `"The quick brown fox jumped over the lazy dog"` is NOT a pangram
+```
+var phrase = "The quick brown fox jumps over the lazy dog"
+let letters = "abcdefghijklmnopqrstuvwxyz"
 
+let letterSet = Set(letters)
+
+let phraseSet = Set(phrase)
+
+if phraseSet.isSuperset(of: letterSet) {
+print("is pangram") }
+else {
+print("not a pangram")
+}
+```
 
 ## Question 3
 
@@ -39,8 +66,38 @@ You are given an array `nums` representing the data status of the set S after th
  Example 3:
  Input: `nums = [2,2]`
  Output: `[2,1]`
+```
+var nums = [1,2,2,4]
+var previousNum = nums[0]
+var duplicateNum: Int = 0
+var missingNum: Int = 0
+var dupeMissing = [Int]()
 
+//find the duplicate number
+for i in 1..<nums.count {
+if nums[i] == previousNum {
+duplicateNum = nums[i]
+dupeMissing.append(duplicateNum)    //appending first number to dupeMissing, is the duplicate number
+break
+}
+previousNum = nums[i]
+}
 
+//creat what the original set should have looked like (1...n) in ascending order
+//numbers are unique and count by 1
+var originalSet: Set<Int> = []
+for i in 1...nums.count {
+originalSet.insert(i)
+}
+
+//find the missing number
+for i in originalSet where nums.contains(i) == false{
+missingNum = i
+dupeMissing.append(i)
+}
+
+print(dupeMissing)
+```
 ## Question 4
 
 Given the 4 arrays of Ints below, create a new array, sorted in ascending order, that contains all the values without duplicates.
@@ -51,8 +108,23 @@ let arr2 = [1, 2, 3, 4, 5, 6]
 let arr3 = [5, 6, 7, 8, 9, 10, 11, 12]
 let arr4 = [1, 3, 4, 5, 6, 7, 9]
 ```
+```
+let arr1 = [2, 4, 5, 6, 8, 10, 12]
+let arr2 = [1, 2, 3, 4, 5, 6]
+let arr3 = [5, 6, 7, 8, 9, 10, 11, 12]
+let arr4 = [1, 3, 4, 5, 6, 7, 9]
 
+var accountNumbers: Set<Int> = []
+var finalArray = [Int]()
 
+var arrayofArrays = [arr4, arr3, arr2, arr1]
+
+for i in arrayofArrays {
+accountNumbers = Set(i).union(accountNumbers)}
+finalArray = Array(accountNumbers).sorted()
+print(finalArray)
+
+```
 ## Question 5
 
 Perform the following set operations on the lists below:
@@ -65,8 +137,12 @@ Perform the following set operations on the lists below:
 ```swift
 let list1: Set = [1, 3, 4, 6, 2, 7, 9]
 let list2: Set = [3, 7, 13, 10, 4]
-```
 
+print(list1.intersection(list2))
+print(list1.symmetricDifference(list2))
+print(list1.union(list2))
+print(list1.subtracting(list2))
+```
 
 ## Question 6
 
@@ -83,13 +159,8 @@ spaceships.insert("Serenity")
 print(spaceships.count)
 ```
 
-- 3
-- 4
-- Nothing will be output
-- 0
-- This code will not compile
-- 1
-- This code will compile but crash
+
+- Nothing will be output //wrong annotation syntax for set type
 
 
 ## Question 7
@@ -112,8 +183,5 @@ if spaceships1.isSubset(of: spaceships2) {
 }
 ```
 
-- This code will compile but crash
-- "This is not a subset"
-- This code will not compile
-- "This is a subset"
-- Nothing will be output
+- This code will not compile // wrong annotation syntax for Set type
+
